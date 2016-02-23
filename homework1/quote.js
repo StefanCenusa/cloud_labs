@@ -4,9 +4,9 @@ var request = require("request")
 
 var options = {
     method: 'GET',
-    url: config.quoteAPI,
+    url: config.quote.quoteAPI,
     headers: {
-        'x-mashape-key': config.quoteAPIKey
+        'x-mashape-key': config.quote.quoteAPIKey
     }
 };
 

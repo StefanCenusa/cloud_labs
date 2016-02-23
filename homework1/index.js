@@ -1,11 +1,21 @@
-var async = require('async')
-    , QuotesManager = require("./QuotesManager");
+var express = require('express')
+    , personalAssistant = require("./personalAssistant");
+var app = express();
 
-async.forever(function run(next) {
-    setTimeout(function(){
-        QuotesManager.getQuote(function quoteRetrieved(err, quote){
-            console.log(quote);
-            next();
-        });
-    }, 5000);
+app.get('/', function (req, res) {
+    personalAssistant.run(function onDone(err){
+        if (err) {
+            res.status(500).json({
+                error: err
+            });
+        } else {
+            res.status(200).json({
+                status: "ok"
+            });
+        }
+    });
+});
+
+app.listen(5000, function () {
+    console.log('App listening on port 5000!');
 });
